@@ -1,0 +1,32 @@
+# vim: set syntax=make:
+
+headers = pointer.h
+headerFilter = pointer.h
+compilerOpts = -I/usr/local/include -I.
+
+---
+
+#include "pointer.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+struct PointerS {
+  void *value;
+};
+
+void InitPointer(Pointer *ptr, void *value) {
+  *ptr = malloc(sizeof(struct PointerS));
+  (*ptr)->value = value;
+}
+
+void PrintPointer(Pointer ptr, int type) {
+  if (INT == type) {
+    printf("(int) ");
+    printf("%d\n", *((int *) ptr->value));
+  }
+
+  if (STRING == type) {
+    printf("(string) ");
+    printf("%s\n", ptr->value);
+  }
+}
